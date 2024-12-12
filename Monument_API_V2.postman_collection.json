@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "0c7b3708-6902-476a-81c9-30c35f6d7ed0",
+		"name": "Monument_API_V2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38617638"
+	},
+	"item": [
+		{
+			"name": "findAll(sortable)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}?sort=asc",
+					"host": [
+						"{{base_url}}"
+					],
+					"query": [
+						{
+							"key": "sort",
+							"value": "asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findByCityName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}of/Ubeda",
+					"host": [
+						"{{base_url}}of"
+					],
+					"path": [
+						"Ubeda"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}1",
+					"host": [
+						"{{base_url}}1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editMonument",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"countryCode\": \"CB\",\r\n    \"countryName\": \"Cuba\",\r\n    \"cityName\": \"Cuba\",\r\n    \"latitude\": 77.3891,\r\n    \"longitude\": 5.9845,\r\n    \"monumentName\": \"Malecón\",\r\n    \"description\": \"A big wall near the sea.\",\r\n    \"photoUrl\": \"https://example.com/malecon.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}1",
+					"host": [
+						"{{base_url}}1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "saveMonument",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"countryCode\": \"ES\",\r\n    \"countryName\": \"Spain\",\r\n    \"cityName\": \"Seville\",\r\n    \"latitude\": 37.3891,\r\n    \"longitude\": -5.9845,\r\n    \"monumentName\": \"Monumento Creado mediante petición post\",\r\n    \"description\": \"A former minaret that was converted to a bell tower for the Seville Cathedral.\",\r\n    \"photoUrl\": \"https://example.com/giralda.jpg\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}",
+					"host": [
+						"{{base_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteMonument",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}4",
+					"host": [
+						"{{base_url}}4"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost:9000/monument/",
+			"type": "string"
+		}
+	]
+}
