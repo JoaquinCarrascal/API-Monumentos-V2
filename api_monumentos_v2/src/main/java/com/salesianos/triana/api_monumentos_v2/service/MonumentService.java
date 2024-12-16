@@ -1,5 +1,6 @@
 package com.salesianos.triana.api_monumentos_v2.service;
 
+import com.salesianos.triana.api_monumentos_v2.exception.MonumentNotFoundException;
 import com.salesianos.triana.api_monumentos_v2.model.Monument;
 import com.salesianos.triana.api_monumentos_v2.repository.MonumentRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,23 +15,51 @@ public class MonumentService extends BaseServiceImpl <Monument, Long , MonumentR
 
     private final MonumentRepository repository;
 
+    @Override
+    public List<Monument> findAll() {
+
+        List<Monument> result = super.findAll();
+
+        if(result.isEmpty())
+            throw new MonumentNotFoundException();
+
+        return result;
+
+    }
+
     public List<Monument> findByCityName(String cityName) {
-        return repository.findByCityName(cityName);
+
+        List<Monument> result = repository.findByCityName(cityName);
+
+        if(result.isEmpty())
+            throw new MonumentNotFoundException();
+
+        return result;
+
     }
 
     public List<Monument> query(String sortDirection) {
-        if (sortDirection.equalsIgnoreCase("asc")) {
-            return repository.findAllByOrderByNameAsc();
-        } else if (sortDirection.equalsIgnoreCase("desc")) {
-            return repository.findAllByOrderByNameDesc();
-        } else {
-            return repository.findAll();
-        }
+        List<Monument> result = switch (sortDirection) {
+            case "asc" -> repository.findAllByOrderByNameAsc();
+            case "desc" -> repository.findAllByOrderByNameDesc();
+            default -> repository.findAll();
+        };
+
+        if(result.isEmpty())
+            throw new MonumentNotFoundException();
+        else
+            return result;
+
     }
 
-    public Optional<Monument> edit(Long id , Monument newMonument){
+    public Monument edit(Long id , Monument newMonument){
 
-        return repository.findById(id).map(oldMonument -> {
+        Optional<Monument> editable = repository.findById(id);
+
+        if(editable.isEmpty())
+            throw new MonumentNotFoundException(id);
+
+        editable.map(oldMonument -> {
             oldMonument.setCountryCode(newMonument.getCountryCode());
             oldMonument.setCountryName(newMonument.getCountryName());
             oldMonument.setCityName(newMonument.getCityName());
@@ -41,6 +70,8 @@ public class MonumentService extends BaseServiceImpl <Monument, Long , MonumentR
             oldMonument.setPhotoUrl(newMonument.getPhotoUrl());
             return repository.save(oldMonument);
         });
+
+        return newMonument;
 
     }
 
