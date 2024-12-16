@@ -15,15 +15,13 @@ public class MonumentService extends BaseServiceImpl <Monument, Long , MonumentR
 
     private final MonumentRepository repository;
 
-    @Override
-    public List<Monument> findAll() {
+    public Monument findMonumentById(Long id){
+        Optional<Monument> mon = repository.findById(id);
 
-        List<Monument> result = super.findAll();
-
-        if(result.isEmpty())
+        if(mon.isEmpty())
             throw new MonumentNotFoundException();
-
-        return result;
+        else
+            return mon.get();
 
     }
 

@@ -15,8 +15,8 @@ public class GlobalErrorController extends ResponseEntityExceptionHandler {
     public ProblemDetail handleMonumentNotFound(MonumentNotFoundException ex) {
         ProblemDetail result = ProblemDetail
                 .forStatusAndDetail(HttpStatus.NOT_FOUND, ex.getMessage());
-        result.setTitle("Monumento no encontrado");
-        result.setType(URI.create("https://triana.salesianos.edu"));
+        result.setTitle("No se encuentra ningún Monumento.");
+        result.setType(URI.create("http://localhost:9000/swagger-ui/index.html"));
         result.setProperty("author", "Joaquín Carrascal");
         return result;
     }

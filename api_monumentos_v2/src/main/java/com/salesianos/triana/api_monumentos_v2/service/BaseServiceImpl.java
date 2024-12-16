@@ -1,5 +1,6 @@
 package com.salesianos.triana.api_monumentos_v2.service;
 
+import com.salesianos.triana.api_monumentos_v2.model.Monument;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 
